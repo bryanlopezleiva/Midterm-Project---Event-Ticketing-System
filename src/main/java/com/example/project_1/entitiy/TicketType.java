@@ -13,7 +13,7 @@ public class TicketType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ticket_type_id;
     private String name;
-    private Integer price;
+    private Double price;
     private Integer quantity_available;
     ///foreign key to event id
 }
