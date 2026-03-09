@@ -9,14 +9,15 @@ import lombok.Data;
 @Entity
 @Data
 public class TicketType {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long ticket_type_id;
 
-  private String name;
-  private Integer price;
-  private Integer quantity_available;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ticket_type_id;
 
-  /// optimistic locking
-  /// foreign key to event id
+    private String name;
+    private Double price;
+    private Integer quantity_available;
+
+    /// optimistic locking
+    /// foreign key to event id
 }
