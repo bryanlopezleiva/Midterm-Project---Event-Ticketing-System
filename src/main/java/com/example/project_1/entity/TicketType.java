@@ -1,9 +1,6 @@
-package com.example.project_1.entitiy;
+package com.example.project_1.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -20,4 +17,7 @@ public class TicketType {
 
     /// optimistic locking
     /// foreign key to event id
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
 }

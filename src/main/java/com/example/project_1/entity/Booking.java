@@ -1,7 +1,9 @@
-package com.example.project_1.entitiy;
+package com.example.project_1.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /// Junction Table
 @Entity
@@ -12,7 +14,7 @@ public class Booking {
     private Long booking_id;
 
     private String booking_reference;
-    private String booking_date;
+    private LocalDateTime booking_date;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

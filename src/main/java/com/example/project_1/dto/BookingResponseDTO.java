@@ -1,6 +1,6 @@
 package com.example.project_1.dto;
 
-import com.example.project_1.entitiy.PaymentStatus;
+import com.example.project_1.entity.PaymentStatus;
 import lombok.Data;
 import java.time.LocalDateTime;
 

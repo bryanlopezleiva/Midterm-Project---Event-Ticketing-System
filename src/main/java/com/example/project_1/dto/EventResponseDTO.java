@@ -1,6 +1,6 @@
 package com.example.project_1.dto;
 
-import com.example.project_1.entitiy.EventStatus;
+import com.example.project_1.entity.EventStatus;
 import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
