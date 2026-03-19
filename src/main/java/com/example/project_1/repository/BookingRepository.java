@@ -10,13 +10,18 @@ import java.util.List;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
+
+    @Query("SELECT b FROM Booking b WHERE b.attendee.attendee_id = :attendeeId")
     List<Booking> findByAttendee_attendee_Id(Long attendeeId);
 
-    boolean existsByAttendee_Attendee_idAndTicketType_Ticket_type_id(Long attendeeId, Long ticketTypeId);
+    @Query("SELECT CASE WHEN COUNT(b) > 0 THEN true ELSE false END "
+            + "FROM Booking b WHERE b.attendee.attendee_id = :attendeeId "
+            + "AND b.ticketType.ticket_type_id = :ticketTypeId")
+    boolean existsByAttendee_Attendee_idAndTicketType_Ticket_type_id(@Param("attendeeId") Long attendeeId, @Param("ticketTypeId") Long ticketTypeId);
 
     @Query("SELECT SUM(b.ticketType.price) FROM Booking b "
-            + "WHERE b.ticketType.event.event_id = :event_id AND b.paymentStatus = 'CONFIRMED'")
+            + "WHERE b.ticketType.event.event_id = :event_id "
+            + "AND b.paymentStatus = 'CONFIRMED'")
+
     Double calculateConfirmedRevenue(@Param("event_id") Long event_id);
-
-
 }
