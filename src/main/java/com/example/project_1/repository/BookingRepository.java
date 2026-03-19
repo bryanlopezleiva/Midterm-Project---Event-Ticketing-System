@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -23,5 +24,5 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             + "WHERE b.ticketType.event.event_id = :event_id "
             + "AND b.paymentStatus = 'CONFIRMED'")
 
-    Double calculateConfirmedRevenue(@Param("event_id") Long event_id);
+    BigDecimal calculateConfirmedRevenue(@Param("event_id") Long event_id);
 }
