@@ -1,5 +1,6 @@
 package com.example.project_1.service;
 
+import com.example.project_1.dto.VenueResponseDTO;
 import com.example.project_1.entity.Venue;
 import com.example.project_1.repository.VenueRepository;
 import org.springframework.stereotype.Service;
@@ -17,18 +18,33 @@ public class VenueService {
 
     @Transactional
     //create Venue
-    public Venue createVenue(Venue venue) {
-        return venueRepository.save(venue);
+    public VenueResponseDTO createVenue(Venue venue) {
+        Venue saved = venueRepository.save(venue);
+        return mapToDTO(saved);
     }
 
     // get all Venues
-    public List<Venue> getAllVenue() {
-        return venueRepository.findAll();
+    public List<VenueResponseDTO> getAllVenue() {
+        return venueRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .toList();
     }
 
     // get Venue by ID Else throw message "Venue not found"
-    public Venue getVenueById(Long id) {
-        return venueRepository.findById(id)
+    public VenueResponseDTO getVenueById(Long id) {
+        Venue venue = venueRepository.findById(id)
                 .orElseThrow(() ->  new RuntimeException("Venue with id " + id + " does not exist"));
+        return mapToDTO(venue);
+    }
+
+    private VenueResponseDTO mapToDTO(Venue venue) {
+        VenueResponseDTO dto = new VenueResponseDTO();
+        dto.setVenue_id(venue.getVenue_id());
+        dto.setName(venue.getName());
+        dto.setAddress(venue.getAddress());
+        dto.setCity(venue.getCity());
+        dto.setTotal_capacity(venue.getTotal_capacity());
+        return dto;
     }
 }
