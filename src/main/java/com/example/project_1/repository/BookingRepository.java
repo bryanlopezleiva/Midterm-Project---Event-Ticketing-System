@@ -1,6 +1,7 @@
 package com.example.project_1.repository;
 
 import com.example.project_1.entity.Booking;
+import com.example.project_1.entity.PaymentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
@@ -17,12 +19,17 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     @Query("SELECT CASE WHEN COUNT(b) > 0 THEN true ELSE false END "
             + "FROM Booking b WHERE b.attendee.attendee_id = :attendeeId "
-            + "AND b.ticketType.ticket_type_id = :ticketTypeId")
+            + "AND b.ticketType.ticketTypeId = :ticketTypeId")
     boolean existsByAttendee_Attendee_idAndTicketType_Ticket_type_id(@Param("attendeeId") Long attendeeId, @Param("ticketTypeId") Long ticketTypeId);
 
-    @Query("SELECT SUM(b.ticketType.price) FROM Booking b "
-            + "WHERE b.ticketType.event.event_id = :event_id "
-            + "AND b.paymentStatus = 'CONFIRMED'")
-
-    BigDecimal calculateConfirmedRevenue(@Param("event_id") Long event_id);
+    @Query("""
+        SELECT SUM(b.ticketType.price)
+        FROM Booking b
+        WHERE b.ticketType.event.event_id = :eventId
+        AND b.paymentStatus = :status
+    """)
+    BigDecimal calculateConfirmedRevenue(
+            @Param("eventId") Long eventId,
+            @Param("status") PaymentStatus status
+    );
 }

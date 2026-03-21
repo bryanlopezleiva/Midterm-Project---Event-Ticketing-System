@@ -11,21 +11,24 @@ import java.time.LocalDateTime;
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long booking_id;
+    @Column(name = "booking_id")
+    private Long bookingId;
 
-    private String booking_reference;
-    private LocalDateTime booking_date;
+    @Column(name = "booking_reference", nullable = false, unique = true)
+    private String bookingReference;
+
+    @Column(name = "booking_date", nullable = false, updatable = false)
+    private LocalDateTime bookingDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PaymentStatus paymentStatus;
-    /// foreign key to attendee id
-    @ManyToOne
-    @JoinColumn(name = "attendee_id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "attendee_id", nullable = false)
     private Attendee attendee;
 
-    /// foreign key to ticket type id
-    @ManyToOne
-    @JoinColumn(name = "ticket_type_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ticket_type_id", nullable = false)
     private TicketType ticketType;
 }
