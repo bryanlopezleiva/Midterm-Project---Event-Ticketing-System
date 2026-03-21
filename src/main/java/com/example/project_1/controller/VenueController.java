@@ -1,5 +1,6 @@
 package com.example.project_1.controller;
 
+import com.example.project_1.dto.VenueResponseDTO;
 import com.example.project_1.entity.Organizer;
 import com.example.project_1.entity.Venue;
 import com.example.project_1.service.OrganizerService;
@@ -22,20 +23,19 @@ public class VenueController {
 
     // POST /api/organizers — creates a new Venue
     @PostMapping
-    public ResponseEntity<Venue> createVenue(@RequestBody Venue venue) {
-        Venue saved = venueService.createVenue(venue);
-        return new ResponseEntity<>(saved, HttpStatus.CREATED); // returns 201
+    public ResponseEntity<VenueResponseDTO> createVenue(@RequestBody Venue venue) {
+        return new ResponseEntity<>(venueService.createVenue(venue), HttpStatus.CREATED); // returns 201
     }
 
     // GET /api/organizers — returns all organizers
     @GetMapping
-    public ResponseEntity<List<Venue>> getAllVenue() {
+    public ResponseEntity<List<VenueResponseDTO>> getAllVenue() {
         return ResponseEntity.ok(venueService.getAllVenue()); // returns 200
     }
 
     // GET /api/organizers/{id} — returns one organizer by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Venue> getVenueById(@PathVariable Long id) {
+    public ResponseEntity<VenueResponseDTO> getVenueById(@PathVariable Long id) {
             return ResponseEntity.ok(venueService.getVenueById(id)); // returns 200
     }
 }
