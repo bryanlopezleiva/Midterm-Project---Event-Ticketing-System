@@ -40,7 +40,7 @@ public class AttendeeService {
     // GET / Get all the bookings for an attendee
     public AttendeeBookingsDTO getAttendeeBookings(Long id) {
         Attendee attendee = attendeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Attendee with id " + id + " does not exist"));
+                .orElseThrow(() -> new RuntimeException("Attendee with id: " + id + " does not exist"));
 
         // Get all bookings for this attendee and map each one to a DTO
         List<BookingResponseDTO> bookingDTOs = bookingRepository
@@ -48,18 +48,19 @@ public class AttendeeService {
                 .stream()
                 .map(booking -> {
                     BookingResponseDTO dto = new BookingResponseDTO();
-                    dto.setBooking_Id(booking.getBooking_id());
-                    dto.setBooking_Reference(booking.getBooking_reference());
-                    dto.setBooking_Date(booking.getBooking_date());
-                    dto.setPayment_Status(booking.getPaymentStatus());
-                    dto.setAttendee_Name(attendee.getName());
+                    dto.setBookingId(booking.getBookingId());
+                    dto.setBookingReference(booking.getBookingReference());
+                    dto.setBookingDate(booking.getBookingDate());
+                    dto.setPaymentStatus(booking.getPaymentStatus());
+                    dto.setAttendeeName(attendee.getName());
                     // navigate booking → ticketType → event to get event name
-                    dto.setEvent_Name(booking.getTicketType().getEvent().getTitle());
-                    dto.setTicket_Type(booking.getTicketType().getName());
+                    dto.setEventTitle(booking.getTicketType().getEvent().getTitle());
+                    dto.setTicketTypeName(booking.getTicketType().getName());
                     dto.setPrice(booking.getTicketType().getPrice());
                     return dto;
                 })
                 .toList();
+
         // Wrap everything in AttendeeBookingsDTO
         AttendeeBookingsDTO result = new AttendeeBookingsDTO();
         result.setAttendee_Id(attendee.getAttendee_id());

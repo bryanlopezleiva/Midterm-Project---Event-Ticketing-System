@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
@@ -117,16 +119,15 @@ public class BookingService {
 
     /// now we want to GET the total revenue for an event based off its {id}
     @Transactional
-    public BigDecimal getRevenueId(Long eventId)
-    {
-        /// here we are checking if the event exists
-        if(!eventRepository.existsById(eventId)) {
-                throw new RuntimeException("Booking does not exists.");
+    public BigDecimal getRevenueByEvent(Long eventId) {
+
+        if (!eventRepository.existsById(eventId)) {
+            throw new RuntimeException("Event does not exist.");
         }
 
-        BigDecimal revenueOutput = bookingRepository.calculateConfirmedRevenue(eventId, PaymentStatus.CONFIRMED);
+        BigDecimal revenue = bookingRepository
+                .calculateConfirmedRevenue(eventId, PaymentStatus.CONFIRMED);
 
-        return revenueOutput != null ? revenueOutput : BigDecimal.ZERO;
+        return revenue != null ? revenue : BigDecimal.ZERO;
     }
-
 }
