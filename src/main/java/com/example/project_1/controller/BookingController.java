@@ -33,10 +33,4 @@ public class BookingController {
         return bookingService.cancelBooking(id);
     }
 
-    /// GET this will return us the revenue from a particular event
-    @GetMapping("/events/{id}/revenue")
-    public BigDecimal getRevenue(@PathVariable Long id)
-    {
-        return bookingService.getRevenueByEvent(id);
-    }
 }

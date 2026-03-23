@@ -3,7 +3,7 @@ package com.example.project_1.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Event {
     private Long event_id;
     private String title;
     private String description;
-    private LocalDate event_date;
+    private LocalDateTime event_date;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
