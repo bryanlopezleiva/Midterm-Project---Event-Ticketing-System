@@ -2,11 +2,6 @@
 ### CPSC 449 — Web Backend Engineering | Cal State Fullerton
 ### Midterm Project
 
-## Demo Video
-
-[Click here to watch the demo](<!-- Add YouTube link here -->)
-
----
 
 ## Team Members
 
