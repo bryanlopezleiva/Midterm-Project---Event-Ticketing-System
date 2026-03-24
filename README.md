@@ -5,11 +5,11 @@
 
 ## Team Members
 
-| Name | CWID |
-|------|------|
-| Bryan Lopez Levia | CWID |
-| Daniel DiPietrantonio | CWID |
-| Ryan Oskuie | CWID |
+| Name | CWID      |
+|------|-----------|
+| Bryan Lopez Levia | 821009883 |
+| Daniel DiPietrantonio | CWID      |
+| Ryan Oskuie | CWID      |
 | Roberto Manra | 868912841 |
 
 ---
