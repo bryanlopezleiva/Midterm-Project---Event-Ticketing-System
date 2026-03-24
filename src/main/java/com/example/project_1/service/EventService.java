@@ -72,11 +72,11 @@ public class EventService  {
 
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
-        Double revenue = eventRepository.calculateConfirmedRevenue(eventId);
+        BigDecimal revenue = eventRepository.calculateConfirmedRevenue(eventId);
         RevenueDTO revenueDTO = new RevenueDTO();
         revenueDTO.setEvent_Id(eventId);
         revenueDTO.setEvent_Name(event.getTitle());
-        revenueDTO.setTotal_Revenue(revenue != null ? BigDecimal.valueOf(revenue) : BigDecimal.ZERO);
+        revenueDTO.setTotal_Revenue(revenue != null ? revenue : BigDecimal.ZERO);
         return revenueDTO;
 
     }
