@@ -116,18 +116,4 @@ public class BookingService {
         dto.setPrice(booking.getTicketType().getPrice());
         return dto;
     }
-
-    /// now we want to GET the total revenue for an event based off its {id}
-    @Transactional
-    public BigDecimal getRevenueByEvent(Long eventId) {
-
-        if (!eventRepository.existsById(eventId)) {
-            throw new RuntimeException("Event does not exist.");
-        }
-
-        BigDecimal revenue = bookingRepository
-                .calculateConfirmedRevenue(eventId, PaymentStatus.CONFIRMED);
-
-        return revenue != null ? revenue : BigDecimal.ZERO;
-    }
 }

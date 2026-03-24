@@ -21,15 +21,4 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             + "FROM Booking b WHERE b.attendee.attendee_id = :attendeeId "
             + "AND b.ticketType.ticketTypeId = :ticketTypeId")
     boolean existsByAttendee_Attendee_idAndTicketType_Ticket_type_id(@Param("attendeeId") Long attendeeId, @Param("ticketTypeId") Long ticketTypeId);
-
-    @Query("""
-        SELECT SUM(b.ticketType.price)
-        FROM Booking b
-        WHERE b.ticketType.event.event_id = :eventId
-        AND b.paymentStatus = :status
-    """)
-    BigDecimal calculateConfirmedRevenue(
-            @Param("eventId") Long eventId,
-            @Param("status") PaymentStatus status
-    );
 }
