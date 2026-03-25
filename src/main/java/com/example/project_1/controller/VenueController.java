@@ -1,10 +1,9 @@
 package com.example.project_1.controller;
 
 import com.example.project_1.dto.VenueResponseDTO;
-import com.example.project_1.entity.Organizer;
 import com.example.project_1.entity.Venue;
-import com.example.project_1.service.OrganizerService;
 import com.example.project_1.service.VenueService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,17 +13,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/venues")
 public class VenueController {
-    private final VenueService venueService;
 
-    // Constructor — Spring injects the OrganizerService automatically
-    public VenueController(VenueService venueService) {
-        this.venueService = venueService;
-    }
+    @Autowired
+    private VenueService venueService;
 
     // POST /api/organizers — creates a new Venue
     @PostMapping
-    public ResponseEntity<VenueResponseDTO> createVenue(@RequestBody Venue venue) {
-        return new ResponseEntity<>(venueService.createVenue(venue), HttpStatus.CREATED); // returns 201
+    @ResponseStatus(HttpStatus.CREATED)
+    public VenueResponseDTO createVenue(@RequestBody Venue venue) {
+        return venueService.createVenue(venue);
     }
 
     // GET /api/organizers — returns all organizers
