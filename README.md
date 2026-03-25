@@ -45,10 +45,35 @@ This is a RESTful backend API for an Event Ticketing System built with Spring Bo
 ## API Screenshots
 
 ### POST /api/organizers
-<!-- Add screenshot here -->
+http://localhost:8080/api/organizers
+input: 
+```json
+{
+    "emial": "contact@fifa.com",
+    "name": "FIFA",
+    "number": "555-0300"
+}
+```
+output: 
+<img width="1919" height="1034" alt="image" src="https://github.com/user-attachments/assets/65bdbf7c-d597-4735-8a88-5b4cef301f83" />
+<img width="1919" height="1035" alt="image" src="https://github.com/user-attachments/assets/a858091d-4e86-4805-ad87-2b6b9f8d2a6a" />
+
+
 
 ### POST /api/venues
-<!-- Add screenshot here -->
+http://localhost:8080/api/venues
+```json
+{
+    "address": "1 MetLife Stadium Dr",
+    "city": "EastRutherford",
+    "name": "MetLife Stadium",
+    "total_capacity": 82500
+}
+```
+Output:
+<img width="1919" height="1031" alt="image" src="https://github.com/user-attachments/assets/7364e477-e0d0-4fa6-9400-8f14ff3a10ea" />
+<img width="1919" height="1030" alt="image" src="https://github.com/user-attachments/assets/6b0c9e80-0375-4e30-ac68-bd8420ad896d" />
+
 
 ### POST /api/events
 <!-- Add screenshot here -->
@@ -60,7 +85,15 @@ This is a RESTful backend API for an Event Ticketing System built with Spring Bo
 <!-- Add screenshot here -->
 
 ### POST /api/attendees
-<!-- Add screenshot here -->
+http://localhost:8080/api/attendees
+```json
+{
+    "name": "Attendee 1",
+    "email": "attendee1@example.com"
+}
+```
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/1d2e2499-7f5d-4e79-ade0-a5b51323cefe" />
+
 
 ### POST /api/bookings
 <!-- Add screenshot here -->
