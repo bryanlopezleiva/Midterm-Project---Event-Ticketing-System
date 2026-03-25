@@ -5,7 +5,7 @@ import java.util.List;
 
 @Data
 public class AttendeeBookingsDTO {
-    private Long attendee_Id;
-    private String attendee_Name;
+    private Long attendeeId;
+    private String attendeeName;
     private List<BookingResponseDTO> bookings;
 }

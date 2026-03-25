@@ -14,11 +14,11 @@ import java.util.Optional;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-    @Query("SELECT b FROM Booking b WHERE b.attendee.attendee_id = :attendeeId")
+    @Query("SELECT b FROM Booking b WHERE b.attendee.attendeeId = :attendeeId")
     List<Booking> findByAttendee_attendee_Id(Long attendeeId);
 
     @Query("SELECT CASE WHEN COUNT(b) > 0 THEN true ELSE false END "
-            + "FROM Booking b WHERE b.attendee.attendee_id = :attendeeId "
+            + "FROM Booking b WHERE b.attendee.attendeeId = :attendeeId "
             + "AND b.ticketType.ticketTypeId = :ticketTypeId")
     boolean existsByAttendee_Attendee_idAndTicketType_Ticket_type_id(@Param("attendeeId") Long attendeeId, @Param("ticketTypeId") Long ticketTypeId);
 }

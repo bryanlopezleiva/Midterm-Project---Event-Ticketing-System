@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 @Data
 public class TicketTypeDTO {
-    private Long ticket_Type_ID;
+    private Long ticketTypeId;
     private String name;
     private BigDecimal price;
-    private Integer quantity_available;
+    private Integer quantityAvailable;
 }

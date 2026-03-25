@@ -40,11 +40,11 @@ public class VenueService {
 
     private VenueResponseDTO mapToDTO(Venue venue) {
         VenueResponseDTO dto = new VenueResponseDTO();
-        dto.setVenue_id(venue.getVenue_id());
+        dto.setVenueId(venue.getVenueId());
         dto.setName(venue.getName());
         dto.setAddress(venue.getAddress());
         dto.setCity(venue.getCity());
-        dto.setTotal_capacity(venue.getTotal_capacity());
+        dto.setTotalCapacity(venue.getTotalCapacity());
         return dto;
     }
 }

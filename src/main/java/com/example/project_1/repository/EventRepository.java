@@ -15,6 +15,6 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findByStatus(EventStatus status);
 
-    @Query("SELECT SUM(tt.price) FROM Booking b JOIN b.ticketType tt WHERE tt.event.event_id = :eventId AND b.paymentStatus = 'CONFIRMED'")
+    @Query("SELECT SUM(tt.price) FROM Booking b JOIN b.ticketType tt WHERE tt.event.eventId = :eventId AND b.paymentStatus = 'CONFIRMED'")
     BigDecimal calculateConfirmedRevenue(@Param("eventId") Long eventId);
 }

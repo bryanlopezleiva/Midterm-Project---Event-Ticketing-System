@@ -35,7 +35,6 @@ public class EventService  {
     }
 
     @Transactional
-
     public EventResponseDTO createEvent(Event event, Long organizerId, Long venueId)
     {
         Organizer organizer = organizerRepository.findById(organizerId)
@@ -74,9 +73,9 @@ public class EventService  {
                 .orElseThrow(() -> new RuntimeException("Event not found"));
         BigDecimal revenue = eventRepository.calculateConfirmedRevenue(eventId);
         RevenueDTO revenueDTO = new RevenueDTO();
-        revenueDTO.setEvent_Id(eventId);
-        revenueDTO.setEvent_Name(event.getTitle());
-        revenueDTO.setTotal_Revenue(revenue != null ? revenue : BigDecimal.ZERO);
+        revenueDTO.setEventId(eventId);
+        revenueDTO.setEventName(event.getTitle());
+        revenueDTO.setTotalRevenue(revenue != null ? revenue : BigDecimal.ZERO);
         return revenueDTO;
 
     }
@@ -84,20 +83,20 @@ public class EventService  {
     private EventResponseDTO mapToDTO(Event event)
     {
         EventResponseDTO dto = new EventResponseDTO();
-        dto.setEvent_Id(event.getEvent_id());
-        dto.setEvent_Name(event.getTitle());
-        dto.setEvent_Description(event.getDescription());
-        dto.setEvent_Date(event.getEvent_date());
-        dto.setEvent_Status(event.getStatus());
-        dto.setOrganizer_Name(event.getOrganizer().getName());
-        dto.setVenue_Name(event.getVenue().getName());
-        dto.setTicket_Types(event.getTicketTypes().stream().map(ticketType ->
+        dto.setEventId(event.getEventId());
+        dto.setEventName(event.getTitle());
+        dto.setEventDescription(event.getDescription());
+        dto.setEventDate(event.getEventDate());
+        dto.setEventStatus(event.getStatus());
+        dto.setOrganizerName(event.getOrganizer().getName());
+        dto.setVenueName(event.getVenue().getName());
+        dto.setTicketTypes(event.getTicketTypes().stream().map(ticketType ->
         {
             TicketTypeDTO ticketTypeDTO = new TicketTypeDTO();
-            ticketTypeDTO.setTicket_Type_ID(ticketType.getTicketTypeId());
+            ticketTypeDTO.setTicketTypeId(ticketType.getTicketTypeId());
             ticketTypeDTO.setName(ticketType.getName());
             ticketTypeDTO.setPrice(ticketType.getPrice());
-            ticketTypeDTO.setQuantity_available(ticketType.getQuantityAvailable());
+            ticketTypeDTO.setQuantityAvailable(ticketType.getQuantityAvailable());
             return ticketTypeDTO;
         }).collect(Collectors.toList()));
         return dto;

@@ -7,13 +7,13 @@ import java.util.List;
 
 @Data
 public class EventResponseDTO {
-    private Long event_Id;
-    private String event_Name;
-    private String event_Description;
-    private LocalDateTime event_Date;
-    private EventStatus event_Status;
+    private Long eventId;
+    private String eventName;
+    private String eventDescription;
+    private LocalDateTime eventDate;
+    private EventStatus eventStatus;
 
-    private String organizer_Name;
-    private String venue_Name;
-    private List<TicketTypeDTO> ticket_Types;
+    private String organizerName;
+    private String venueName;
+    private List<TicketTypeDTO> ticketTypes;
 }

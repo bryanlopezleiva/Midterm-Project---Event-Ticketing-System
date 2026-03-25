@@ -40,7 +40,7 @@ public class OrganizerService {
 
     private OrganizerResponseDTO mapToDTO(Organizer organizer) {
         OrganizerResponseDTO dto = new OrganizerResponseDTO();
-        dto.setOrganizer_id(organizer.getOrganizer_id());
+        dto.setOrganizerId(organizer.getOrganizerId());
         dto.setName(organizer.getName());
         dto.setEmail(organizer.getEmail());
         dto.setNumber(organizer.getNumber());

@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class VenueResponseDTO {
-    private Long venue_id;
+    private Long venueId;
     private String name;
     private String address;
     private String city;
-    private Integer total_capacity;
+    private Integer totalCapacity;
 }

@@ -11,13 +11,15 @@ import java.util.List;
 public class Venue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long venue_id;
+    @Column(name="venue_id")
+    private Long venueId;
 
     @Column(nullable = false)
     private String name;
     private String address;
     private String city;
-    private Integer total_capacity;
+    @Column(name="total_capacity")
+    private Integer totalCapacity;
 
     @OneToMany(mappedBy = "venue")
     private List<Event> events = new ArrayList<>();
