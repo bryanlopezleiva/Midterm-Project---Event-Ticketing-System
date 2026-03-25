@@ -5,7 +5,7 @@ import com.example.project_1.entity.*;
 import com.example.project_1.repository.AttendeeRepository;
 import com.example.project_1.repository.BookingRepository;
 import com.example.project_1.repository.TicketTypeRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
