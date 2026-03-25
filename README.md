@@ -85,7 +85,15 @@ Output:
 <!-- Add screenshot here -->
 
 ### POST /api/attendees
-<!-- Add screenshot here -->
+http://localhost:8080/api/attendees
+```json
+{
+    "name": "Attendee 1",
+    "email": "attendee1@example.com"
+}
+```
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/1d2e2499-7f5d-4e79-ade0-a5b51323cefe" />
+
 
 ### POST /api/bookings
 <!-- Add screenshot here -->
