@@ -8,7 +8,7 @@
 | Name | CWID      |
 |------|-----------|
 | Bryan Lopez Levia | 821009883 |
-| Daniel DiPietrantonio | CWID      |
+| Daniel DiPietrantonio | 831231386 |
 | Ryan Oskuie | 885384289      |
 | Roberto Manra | 868912841 |
 
