@@ -3,6 +3,7 @@ package com.example.project_1.service;
 import com.example.project_1.dto.OrganizerResponseDTO;
 import com.example.project_1.entity.Organizer;
 import com.example.project_1.repository.OrganizerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,24 +11,25 @@ import java.util.List;
 
 @Service
 public class OrganizerService {
-    private final OrganizerRepository organizerRepository;
-
-    public OrganizerService(OrganizerRepository organizerRepository) {
-        this.organizerRepository = organizerRepository;
-    }
+    @Autowired
+    private OrganizerRepository organizerRepository;
 
     @Transactional
     // Create a new Organizer
     public OrganizerResponseDTO createOrganizer(Organizer organizer) {
-        Organizer saved = organizerRepository.save(organizer);
-        return mapToDTO(saved);
+        if (organizerRepository.existsByEmail(organizer.getEmail())) {
+            throw new RuntimeException("Email already registered");
+        }
+
+        Organizer savedOrganizer = organizerRepository.save(organizer);
+        return mapToOrganizerResponseDTO(savedOrganizer);
     }
 
     // Get all Organizers
     public List<OrganizerResponseDTO> getAllOrganizers() {
         return organizerRepository.findAll()
                 .stream()
-                .map(this::mapToDTO)
+                .map(this::mapToOrganizerResponseDTO)
                 .toList();
     }
 
@@ -35,10 +37,10 @@ public class OrganizerService {
     public OrganizerResponseDTO getOrganizerById(long id) {
         Organizer organizer = organizerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Organizer with id " + id + " does not exist"));
-        return mapToDTO(organizer);
+        return mapToOrganizerResponseDTO(organizer);
     }
 
-    private OrganizerResponseDTO mapToDTO(Organizer organizer) {
+    private OrganizerResponseDTO mapToOrganizerResponseDTO(Organizer organizer) {
         OrganizerResponseDTO dto = new OrganizerResponseDTO();
         dto.setOrganizerId(organizer.getOrganizerId());
         dto.setName(organizer.getName());

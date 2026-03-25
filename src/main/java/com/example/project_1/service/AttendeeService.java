@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Book;
 import java.util.List;
 
 @Service
@@ -54,7 +53,7 @@ public class AttendeeService {
 
     private AttendeeResponseDTO mapToAttendeeResponseDTO(Attendee attendee) {
         AttendeeResponseDTO dto = new AttendeeResponseDTO();
-        dto.setAttendee_Id(attendee.getAttendee_id());
+        dto.setAttendeeId(attendee.getAttendeeId());
         dto.setName(attendee.getName());
         dto.setEmail(attendee.getEmail());
         return dto;
@@ -75,8 +74,8 @@ public class AttendeeService {
 
     private AttendeeBookingsDTO mapToAttendeeBookingsDTO(Attendee attendee, List<BookingResponseDTO> bookings) {
         AttendeeBookingsDTO dto = new AttendeeBookingsDTO();
-        dto.setAttendee_Id(attendee.getAttendee_id());
-        dto.setAttendee_Name(attendee.getName());
+        dto.setAttendeeId(attendee.getAttendeeId());
+        dto.setAttendeeName(attendee.getName());
         dto.setBookings(bookings);
         return dto;
     }

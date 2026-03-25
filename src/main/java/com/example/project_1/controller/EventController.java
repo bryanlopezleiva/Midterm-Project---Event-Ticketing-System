@@ -5,6 +5,7 @@ import com.example.project_1.dto.RevenueDTO;
 import com.example.project_1.entity.Event;
 import com.example.project_1.service.EventService;
 import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +17,18 @@ import java.util.List;
 
 public class EventController {
 
-    private final EventService eventService;
 
-    public EventController(EventService eventService)
-    {
-        this.eventService = eventService;
-    }
+    @Autowired
+    private EventService eventService;
 
     @PostMapping
-    public ResponseEntity<EventResponseDTO> createEvent(
+    @ResponseStatus(HttpStatus.CREATED)
+    public EventResponseDTO createEvent(
             @RequestBody Event event,
             @RequestParam Long organizerId,
             @RequestParam Long venueId)
     {
-        EventResponseDTO created = eventService.createEvent(event, organizerId, venueId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        return eventService.createEvent(event, organizerId, venueId);
     }
 
     @GetMapping

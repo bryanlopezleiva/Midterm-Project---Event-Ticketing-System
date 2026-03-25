@@ -10,6 +10,7 @@ import com.example.project_1.entity.Venue;
 import com.example.project_1.repository.EventRepository;
 import com.example.project_1.repository.OrganizerRepository;
 import com.example.project_1.repository.VenueRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,18 +22,16 @@ import java.math.BigDecimal;
 
 public class EventService  {
 
-    private final EventRepository eventRepository;
-    private final OrganizerRepository organizerRepository;
-    private final VenueRepository venueRepository;
 
-    public EventService(EventRepository eventRepository,
-                        OrganizerRepository organizerRepository,
-                        VenueRepository venueRepository)
-    {
-        this.eventRepository = eventRepository;
-        this.organizerRepository = organizerRepository;
-        this.venueRepository = venueRepository;
-    }
+    @Autowired
+    private EventRepository eventRepository;
+
+    @Autowired
+    private OrganizerRepository organizerRepository;
+
+    @Autowired
+    private VenueRepository venueRepository;
+
 
     @Transactional
     public EventResponseDTO createEvent(Event event, Long organizerId, Long venueId)
@@ -47,14 +46,14 @@ public class EventService  {
         event.setStatus(EventStatus.UPCOMING);
 
         Event saved = eventRepository.save(event);
-        return mapToDTO(saved);
+        return mapToEventResponseDTO(saved);
     }
 
     public List <EventResponseDTO> getAllUpcomingEvents()
     {
         return  eventRepository.findByStatus(EventStatus.UPCOMING)
                 .stream()
-                .map(this::mapToDTO)
+                .map(this::mapToEventResponseDTO)
                 .collect(Collectors.toList());
     }
 
@@ -62,7 +61,7 @@ public class EventService  {
     {
                 Event event = eventRepository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Event not found"));
-                return mapToDTO(event);
+                return mapToEventResponseDTO(event);
 
     }
 
@@ -80,7 +79,7 @@ public class EventService  {
 
     }
 
-    private EventResponseDTO mapToDTO(Event event)
+    private EventResponseDTO mapToEventResponseDTO(Event event)
     {
         EventResponseDTO dto = new EventResponseDTO();
         dto.setEventId(event.getEventId());
