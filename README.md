@@ -39,6 +39,8 @@ This is a RESTful backend API for an Event Ticketing System built with Spring Bo
 | PUT | `/api/bookings/{id}/cancel` | Cancel a booking |
 | GET | `/api/events/{id}/revenue` | Get total revenue for an event |
 | GET | `/api/attendees/{id}/bookings` | Get all bookings for an attendee |
+| POST | `/api/events/{evntId}/tickettypes` | Create a ticket type for an event |
+| Get | `/api/events/{eventId}/tickettypes` | Get all ticket types for an event | 
 
 ---
 
@@ -93,7 +95,9 @@ http://localhost:8080/api/events
 
 
 ### GET /api/events/{id}
-<!-- Add screenshot here -->
+http://localhost:8080/api/events/2
+<img width="1919" height="1030" alt="image" src="https://github.com/user-attachments/assets/3febef9a-21d8-4098-acde-b25359fc0338" />
+
 
 ### POST /api/attendees
 http://localhost:8080/api/attendees
@@ -107,15 +111,49 @@ http://localhost:8080/api/attendees
 
 
 ### POST /api/bookings
-<!-- Add screenshot here -->
+http://localhost:8080/api/bookings?attendeeId=1&ticketTypeId=2
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/5994534e-bfd0-443a-822c-897fa77ed656" />
+<img width="1916" height="1033" alt="image" src="https://github.com/user-attachments/assets/175aeba6-7fbb-4589-8322-1702d70a559c" />
+
+
 
 ### PUT /api/bookings/{id}/cancel
-<!-- Add screenshot here -->
+POST http://localhost:8080/api/bookings?attendeeId=5&ticketTypeId=4
+<img width="1919" height="1031" alt="image" src="https://github.com/user-attachments/assets/b579a6ce-844a-40a3-8bfd-3041cb524090" />
+GET http://localhost:8080/api/events
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/6e336f84-dd4a-4a0f-b492-4e6f1655382e" />
+PUT http://localhost:8080/api/bookings/6/cancel
+<img width="1916" height="1034" alt="image" src="https://github.com/user-attachments/assets/d6ef1f24-0009-49d3-a307-509a3009796f" />
+GET http://localhost:8080/api/events
+<img width="1919" height="1031" alt="image" src="https://github.com/user-attachments/assets/30674833-fec1-4128-90b4-84645275ae3a" />
+
+
 
 ### GET /api/events/{id}/revenue
-<!-- Add screenshot here -->
+http://localhost:8080/api/events/2/revenue
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/c157dcce-da4d-47c1-a635-1abb13f37baa" />
+
 
 ### GET /api/attendees/{id}/bookings
-<!-- Add screenshot here -->
+http://localhost:8080/api/attendees/1/bookings
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/7373bfcf-1ec2-43b4-8c10-0f3790ab1f4e" />
+
+
+### POST /api/events/{evntId}/tickettypes
+http://localhost:8080/api/events/2/tickettypes
+```json
+{
+    "name": "General Admission",
+    "price": 50.00,
+    "quantityAvailable": 10
+}
+```
+<img width="1919" height="1034" alt="image" src="https://github.com/user-attachments/assets/5eb4eacb-e3f8-4fe8-9255-08870ea0b653" />
+
+
+### GET /api/events/{evntId}/tickettypes
+http://localhost:8080/api/events/2/tickettypes
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/b9b1ec4e-efa3-4eb6-b54f-9c8395708984" />
+
 
 ---
