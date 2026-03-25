@@ -33,7 +33,7 @@ public class AttendeeService {
         }
         Attendee saved = attendeeRepository.save(attendee);
         AttendeeResponseDTO dto = new AttendeeResponseDTO();
-        dto.setAttendee_Id(saved.getAttendee_id());
+        dto.setAttendeeId(saved.getAttendeeId());
         dto.setName(saved.getName());
         dto.setEmail(saved.getEmail());
         return dto;
