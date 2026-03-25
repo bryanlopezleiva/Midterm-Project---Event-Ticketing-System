@@ -10,11 +10,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Service
 public class BookingService {
@@ -26,9 +23,6 @@ public class BookingService {
 
     @Autowired
     private TicketTypeRepository ticketTypeRepository;
-
-    @Autowired
-    private EventRepository eventRepository;
 
     /// this will be the POST into /api/bookings
     @Transactional
@@ -73,16 +67,7 @@ public class BookingService {
         saved.setBookingReference(reference);
         bookingRepository.save(saved);
 
-        BookingResponseDTO dto = new BookingResponseDTO();
-        dto.setBookingId(saved.getBookingId());
-        dto.setBookingReference(saved.getBookingReference());
-        dto.setBookingDate(saved.getBookingDate());
-        dto.setPaymentStatus(saved.getPaymentStatus());
-        dto.setAttendeeName(saved.getAttendee().getName());
-        dto.setEventTitle(saved.getTicketType().getEvent().getTitle());
-        dto.setTicketTypeName(saved.getTicketType().getName());
-        dto.setPrice(saved.getTicketType().getPrice());
-        return dto; 
+        return mapToBookingResponseDTO(saved);
     }
 
     /// now we need to cancel a booking - PUT/api/bookings/{id}/ cancel
@@ -105,6 +90,11 @@ public class BookingService {
         bookingRepository.save(booking);
         ticketTypeRepository.save(ticketType);
 
+        return mapToBookingResponseDTO(booking);
+    }
+
+    private BookingResponseDTO mapToBookingResponseDTO(Booking booking)
+    {
         BookingResponseDTO dto = new BookingResponseDTO();
         dto.setBookingId(booking.getBookingId());
         dto.setBookingReference(booking.getBookingReference());
