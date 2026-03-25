@@ -76,10 +76,21 @@ Output:
 
 
 ### POST /api/events
-<!-- Add screenshot here -->
+http://localhost:8080/api/events?organizerId=4&venueId=3
+```json
+{
+    "title": "World Cup semi-Final 1",
+    "eventDate": "2026-07-14T12:00:00",
+    "description": "The first semi-Final match of the 2026 FIFA World Cup"
+}
+```
+<img width="1918" height="1032" alt="image" src="https://github.com/user-attachments/assets/a64aee87-b545-452c-a602-ce23e0a107ff" />
+
 
 ### GET /api/events
-<!-- Add screenshot here -->
+http://localhost:8080/api/events
+<img width="1919" height="1036" alt="image" src="https://github.com/user-attachments/assets/af874c8b-9f5e-4aa1-a02f-383c386133c6" />
+
 
 ### GET /api/events/{id}
 <!-- Add screenshot here -->
