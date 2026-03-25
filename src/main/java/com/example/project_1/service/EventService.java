@@ -3,14 +3,11 @@ package com.example.project_1.service;
 import com.example.project_1.dto.EventResponseDTO;
 import com.example.project_1.dto.RevenueDTO;
 import com.example.project_1.dto.TicketTypeDTO;
-import com.example.project_1.entity.Event;
-import com.example.project_1.entity.EventStatus;
-import com.example.project_1.entity.Organizer;
-import com.example.project_1.entity.Venue;
+import com.example.project_1.entity.*;
+import com.example.project_1.repository.BookingRepository;
 import com.example.project_1.repository.EventRepository;
 import com.example.project_1.repository.OrganizerRepository;
 import com.example.project_1.repository.VenueRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,16 +19,21 @@ import java.math.BigDecimal;
 
 public class EventService  {
 
+    private final EventRepository eventRepository;
+    private final OrganizerRepository organizerRepository;
+    private final VenueRepository venueRepository;
+    private final BookingRepository bookingRepository;
 
-    @Autowired
-    private EventRepository eventRepository;
-
-    @Autowired
-    private OrganizerRepository organizerRepository;
-
-    @Autowired
-    private VenueRepository venueRepository;
-
+    public EventService(EventRepository eventRepository,
+                        OrganizerRepository organizerRepository,
+                        VenueRepository venueRepository,
+                        BookingRepository bookingRepository)
+    {
+        this.eventRepository = eventRepository;
+        this.organizerRepository = organizerRepository;
+        this.venueRepository = venueRepository;
+        this.bookingRepository = bookingRepository;
+    }
 
     @Transactional
     public EventResponseDTO createEvent(Event event, Long organizerId, Long venueId)
@@ -46,14 +48,14 @@ public class EventService  {
         event.setStatus(EventStatus.UPCOMING);
 
         Event saved = eventRepository.save(event);
-        return mapToEventResponseDTO(saved);
+        return mapToDTO(saved);
     }
 
     public List <EventResponseDTO> getAllUpcomingEvents()
     {
         return  eventRepository.findByStatus(EventStatus.UPCOMING)
                 .stream()
-                .map(this::mapToEventResponseDTO)
+                .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
@@ -61,7 +63,7 @@ public class EventService  {
     {
                 Event event = eventRepository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Event not found"));
-                return mapToEventResponseDTO(event);
+                return mapToDTO(event);
 
     }
 
@@ -70,7 +72,7 @@ public class EventService  {
 
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
-        BigDecimal revenue = eventRepository.calculateConfirmedRevenue(eventId);
+        BigDecimal revenue = bookingRepository.calculateConfirmedRevenue(eventId);
         RevenueDTO revenueDTO = new RevenueDTO();
         revenueDTO.setEventId(eventId);
         revenueDTO.setEventName(event.getTitle());
@@ -79,7 +81,7 @@ public class EventService  {
 
     }
 
-    private EventResponseDTO mapToEventResponseDTO(Event event)
+    private EventResponseDTO mapToDTO(Event event)
     {
         EventResponseDTO dto = new EventResponseDTO();
         dto.setEventId(event.getEventId());
