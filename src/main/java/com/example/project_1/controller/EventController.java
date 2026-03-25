@@ -4,6 +4,7 @@ import com.example.project_1.dto.EventResponseDTO;
 import com.example.project_1.dto.RevenueDTO;
 import com.example.project_1.entity.Event;
 import com.example.project_1.service.EventService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,8 @@ import java.util.List;
 @RequestMapping ("/api/events")
 
 public class EventController {
-
-    private final EventService eventService;
-
-    public EventController(EventService eventService)
-    {
-        this.eventService = eventService;
-    }
+    @Autowired
+    EventService eventService;
 
     @PostMapping
     public ResponseEntity<EventResponseDTO> createEvent(

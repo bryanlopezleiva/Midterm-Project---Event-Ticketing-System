@@ -8,6 +8,7 @@ import com.example.project_1.repository.BookingRepository;
 import com.example.project_1.repository.EventRepository;
 import com.example.project_1.repository.OrganizerRepository;
 import com.example.project_1.repository.VenueRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,24 +17,13 @@ import java.util.stream.Collectors;
 import java.math.BigDecimal;
 
 @Service
-
+@RequiredArgsConstructor
 public class EventService  {
 
     private final EventRepository eventRepository;
     private final OrganizerRepository organizerRepository;
     private final VenueRepository venueRepository;
     private final BookingRepository bookingRepository;
-
-    public EventService(EventRepository eventRepository,
-                        OrganizerRepository organizerRepository,
-                        VenueRepository venueRepository,
-                        BookingRepository bookingRepository)
-    {
-        this.eventRepository = eventRepository;
-        this.organizerRepository = organizerRepository;
-        this.venueRepository = venueRepository;
-        this.bookingRepository = bookingRepository;
-    }
 
     @Transactional
     public EventResponseDTO createEvent(Event event, Long organizerId, Long venueId)
