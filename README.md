@@ -22,7 +22,7 @@ This is a RESTful backend API for an Event Ticketing System built with Spring Bo
 
 ## Demo Video
 
-[Watch a demo](<!--YT link -->)
+[Watch a demo](https://youtu.be/0ZMZxrGEaS0)
 
 
 ## API Endpoints
